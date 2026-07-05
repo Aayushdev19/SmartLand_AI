@@ -1,0 +1,93 @@
+{
+  "best_model": "GradientBoosting",
+  "features": [
+    "District",
+    "Locality",
+    "Area_Category",
+    "Land_Type",
+    "Jantri_Price_sq_m",
+    "year_norm",
+    "jantri_market_ratio"
+  ],
+  "cat_cols": [
+    "District",
+    "Locality",
+    "Area_Category",
+    "Land_Type"
+  ],
+  "num_cols": [
+    "Jantri_Price_sq_m",
+    "year_norm",
+    "jantri_market_ratio"
+  ],
+  "target": "Market_Price_sq_m",
+  "metrics": {
+    "mae": 250.9361848049554,
+    "rmse": 419.27402264044133,
+    "r2": 0.9991276614072572
+  },
+  "all_results": {
+    "LinearRegression": {
+      "mae": 3391.2167965992357,
+      "rmse": 4360.566433841578,
+      "r2": 0.9056428117909693
+    },
+    "Ridge": {
+      "mae": 3445.0521320251555,
+      "rmse": 4389.472782658574,
+      "r2": 0.9043876710855528
+    },
+    "RandomForest": {
+      "mae": 331.1432544999126,
+      "rmse": 589.450612864412,
+      "r2": 0.998275814362824
+    },
+    "GradientBoosting": {
+      "mae": 250.9361848049554,
+      "rmse": 419.27402264044133,
+      "r2": 0.9991276614072572
+    }
+  },
+  "train_rows": 786,
+  "test_rows": 197,
+  "districts": [
+    "Vadodara"
+  ],
+  "localities": [
+    "Alkapuri",
+    "Atladara",
+    "Bajwa",
+    "Diwalipura",
+    "Fatehgunj",
+    "Gotri",
+    "Gotri Road",
+    "Jambuva",
+    "Kalali",
+    "Karelibaug",
+    "Makarpura",
+    "Maneja",
+    "Manjalpur",
+    "Padra Road",
+    "Por",
+    "Sevasi",
+    "Subhanpura",
+    "Tarsali",
+    "Vasna Road",
+    "Waghodia Road"
+  ],
+  "land_types": [
+    "Commercial",
+    "Residential"
+  ],
+  "area_categories": [
+    "Rural",
+    "Semi-Urban",
+    "Urban"
+  ],
+  "year_min": 2000,
+  "year_max": 2024,
+  "jantri_min": 6400.0,
+  "jantri_max": 9000.0,
+  "price_min": 8820.0,
+  "price_max": 71107.95
+}

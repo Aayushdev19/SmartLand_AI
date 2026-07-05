@@ -1,0 +1,174 @@
+{
+  "by_district": [
+    {
+      "District": "Vadodara",
+      "avg_price": 27158.0,
+      "min_price": 8820.0,
+      "max_price": 71108.0,
+      "transactions": 983
+    }
+  ],
+  "by_land_type": {
+    "Commercial": 29661.0,
+    "Residential": 24661.0
+  },
+  "by_year": {
+    "2000": 12236.0,
+    "2001": 13027.0,
+    "2002": 13364.0,
+    "2003": 14215.0,
+    "2004": 15122.0,
+    "2005": 16087.0,
+    "2006": 17115.0,
+    "2007": 18208.0,
+    "2008": 19373.0,
+    "2009": 20613.0,
+    "2010": 21934.0,
+    "2011": 23340.0,
+    "2012": 24838.0,
+    "2013": 26432.0,
+    "2014": 28131.0,
+    "2015": 29940.0,
+    "2016": 31866.0,
+    "2017": 33918.0,
+    "2018": 36104.0,
+    "2019": 38432.0,
+    "2020": 40912.0,
+    "2021": 43554.0,
+    "2022": 46369.0,
+    "2023": 49368.0,
+    "2024": 45733.0
+  },
+  "by_area_category": {
+    "Rural": 17556.0,
+    "Semi-Urban": 24689.0,
+    "Urban": 33299.0
+  },
+  "jantri_vs_market": [
+    {
+      "Year": 2000,
+      "Jantri_Price_sq_m": 7889.0,
+      "Market_Price_sq_m": 12236.0
+    },
+    {
+      "Year": 2001,
+      "Jantri_Price_sq_m": 7889.0,
+      "Market_Price_sq_m": 13027.0
+    },
+    {
+      "Year": 2002,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 13364.0
+    },
+    {
+      "Year": 2003,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 14215.0
+    },
+    {
+      "Year": 2004,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 15122.0
+    },
+    {
+      "Year": 2005,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 16087.0
+    },
+    {
+      "Year": 2006,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 17115.0
+    },
+    {
+      "Year": 2007,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 18208.0
+    },
+    {
+      "Year": 2008,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 19373.0
+    },
+    {
+      "Year": 2009,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 20613.0
+    },
+    {
+      "Year": 2010,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 21934.0
+    },
+    {
+      "Year": 2011,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 23340.0
+    },
+    {
+      "Year": 2012,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 24838.0
+    },
+    {
+      "Year": 2013,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 26432.0
+    },
+    {
+      "Year": 2014,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 28131.0
+    },
+    {
+      "Year": 2015,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 29940.0
+    },
+    {
+      "Year": 2016,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 31866.0
+    },
+    {
+      "Year": 2017,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 33918.0
+    },
+    {
+      "Year": 2018,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 36104.0
+    },
+    {
+      "Year": 2019,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 38432.0
+    },
+    {
+      "Year": 2020,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 40912.0
+    },
+    {
+      "Year": 2021,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 43554.0
+    },
+    {
+      "Year": 2022,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 46369.0
+    },
+    {
+      "Year": 2023,
+      "Jantri_Price_sq_m": 7750.0,
+      "Market_Price_sq_m": 49368.0
+    },
+    {
+      "Year": 2024,
+      "Jantri_Price_sq_m": 7510.0,
+      "Market_Price_sq_m": 45733.0
+    }
+  ]
+}
