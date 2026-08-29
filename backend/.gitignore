@@ -1,4 +1,3 @@
-# ── Python ───────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
@@ -6,44 +5,22 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-
-# ── Virtual environments ──────────────────────────
 venv/
 env/
 .venv/
 .env/
 ENV/
-
-# ── Environment (NEVER commit) ────────────────────
 .env
 .env.local
 .env.production
 *.env
-
-# ── ML Model files ───────────────────────────────
-# .pkl and .json model files ARE committed so Render can load them at runtime
-# Only ignore large joblib dumps if you have separate ones
 *.joblib
-
-# ── Dataset ───────────────────────────────────────
-# Commit the dataset so train.py can run on Render if needed
-# Remove these lines if the file is too large (>100MB use Git LFS instead)
-# *.xlsx
-# *.csv
-
-# ── Jupyter notebooks checkpoints ────────────────
 .ipynb_checkpoints/
 *.ipynb
-
-# ── OS ────────────────────────────────────────────
 .DS_Store
 Thumbs.db
-
-# ── Logs ──────────────────────────────────────────
 *.log
 uvicorn.log
-
-# ── pytest / coverage ─────────────────────────────
 .pytest_cache/
 .coverage
 htmlcov/
