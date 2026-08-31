@@ -191,7 +191,7 @@ export default function AnalyticsPage() {
           </ChartCard>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 16, marginBottom: 16 }}>
+        <div className="sl-analytics-districts" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 16, marginBottom: 16 }}>
           <ChartCard title="By Land Type" subtitle="Avg price ₹/sq m">
             {loading ? <Skel h={200} /> : (
               <>
@@ -221,7 +221,8 @@ export default function AnalyticsPage() {
 
           <ChartCard title="Top Districts by Market Price" subtitle="Average ₹/sq m">
             {loading ? <Skel h={280} /> : (
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <div className="table-responsive">
+              <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 480 }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid #F1F5F9' }}>
                     {['#', 'District', 'Avg ₹/sq m', 'Min', 'Max', 'Transactions'].map(h => (
@@ -246,6 +247,7 @@ export default function AnalyticsPage() {
                   ))}
                 </tbody>
               </table>
+              </div>
             )}
           </ChartCard>
         </div>

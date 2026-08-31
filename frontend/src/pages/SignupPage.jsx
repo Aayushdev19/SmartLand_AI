@@ -113,7 +113,7 @@ export default function SignupPage() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', background: '#F0F2F5', overflowY: 'auto' }}>
+      <div className="sl-auth-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', background: '#F0F2F5', overflowY: 'auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

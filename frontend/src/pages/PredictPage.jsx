@@ -334,7 +334,7 @@ export default function PredictPage() {
                         <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: '#94A3B8', textTransform: 'uppercase', marginBottom: 10 }}>
                           Estimated Market Value
                         </p>
-                        <p style={{ fontSize: 44, fontWeight: 800, letterSpacing: '-0.04em', color: '#0F172A', lineHeight: 1, marginBottom: 10 }}>
+                        <p className="sl-price-display" style={{ fontWeight: 800, letterSpacing: '-0.04em', color: '#0F172A', lineHeight: 1, marginBottom: 10 }}>
                           ₹{result.predicted_price_sqm.toLocaleString('en-IN')}<span style={{ fontSize: 18, color: '#94A3B8' }}>/sq m</span>
                         </p>
                         {result.total_value && (

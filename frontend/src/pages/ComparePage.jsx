@@ -148,8 +148,8 @@ export default function ComparePage() {
           )}
         </AnimatePresence>
 
-        <div className="sl-card" style={{ marginBottom: 16, overflow: 'hidden' }}>
-          <div style={{
+        <div className="sl-compare-grid sl-card" style={{ marginBottom: 16, overflow: 'hidden' }}>
+          <div className="sl-compare-grid-inner" style={{
             display: 'grid',
             gridTemplateColumns: `180px repeat(${colCount - 1}, 1fr)`,
             borderBottom: '1px solid #F1F5F9',
@@ -204,6 +204,7 @@ export default function ComparePage() {
             return (
               <div
                 key={metric.key}
+                className="sl-compare-grid-inner"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: `180px repeat(${colCount - 1}, 1fr)`,

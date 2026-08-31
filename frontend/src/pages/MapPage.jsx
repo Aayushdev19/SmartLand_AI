@@ -280,7 +280,8 @@ export default function MapPage() {
               <motion.div
                 initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }}
                 transition={{ duration: 0.22 }}
-                style={{ position: 'absolute', bottom: 16, right: 16, zIndex: 1000, width: 280, background: '#fff', borderRadius: 14, border: '1px solid #E2E8F0', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}
+                className="sl-map-selected-card"
+                style={{ position: 'absolute', bottom: 16, right: 16, zIndex: 1000, background: '#fff', borderRadius: 14, border: '1px solid #E2E8F0', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', padding: '14px 16px', borderBottom: '1px solid #F1F5F9' }}>
                   <div>

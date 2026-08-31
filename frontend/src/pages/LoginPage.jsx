@@ -97,7 +97,7 @@ export default function LoginPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease }}
-          className="sl-card"
+          className="sl-card sl-auth-form-card"
           style={{ width: '100%', maxWidth: 420, padding: '40px', borderRadius: 16 }}
         >
           <div style={{ marginBottom: 32 }}>
