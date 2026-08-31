@@ -214,7 +214,7 @@ export default function MapPage() {
 
         <div style={{ flex: 1, position: 'relative' }}>
           <MapContainer center={MAP_CENTER} zoom={12} style={{ width: '100%', height: '100%' }} zoomControl={false}>
-            <TileLayer url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png" attribution="© CartoDB" />
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
             <ClickPin onPin={p => { setPin(p); setSelected(null); }} />
             <RecenterBtn center={MAP_CENTER} />
 
