@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
+const LINKS = ['Privacy Policy', 'Terms of Service', 'Contact'];
+
 export default function Footer() {
   return (
     <footer style={{ background: '#fff', borderTop: '1px solid #E2E8F0', padding: '20px 24px' }}>
@@ -8,7 +10,7 @@ export default function Footer() {
         <Logo size="sm" />
 
         <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-          {['Privacy Policy', 'Terms of Service', 'Cookies', 'Accessibility'].map((item) => (
+          {LINKS.map(item => (
             <Link
               key={item}
               to="/"
@@ -21,7 +23,9 @@ export default function Footer() {
           ))}
         </div>
 
-        <p style={{ fontSize: 12, color: '#94A3B8' }}>© 2026 SmartLand-AI. All rights reserved.</p>
+        <p style={{ fontSize: 12, color: '#94A3B8' }}>
+          © {new Date().getFullYear()} SmartLand AI. All rights reserved.
+        </p>
       </div>
     </footer>
   );
