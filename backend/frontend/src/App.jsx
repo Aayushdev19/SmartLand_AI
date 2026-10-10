@@ -1,4 +1,4 @@
-import { lazy, Suspense, memo } from 'react';
+﻿import { lazy, Suspense, memo } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -15,20 +15,22 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const SignupPage = lazy(() => import('./pages/SignupPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 
-const PageLoader = memo(() => (
-  <div style={{ position: 'fixed', top: 56, left: 0, right: 0, zIndex: 9999 }}>
-    <div
-      style={{ height: 2, background: '#0F172A', animation: 'loadBar 1.2s ease forwards' }}
-    />
-    <style>{`
-      @keyframes loadBar {
-        0% { width: 0%; opacity: 1; }
-        80% { width: 90%; }
-        100% { width: 100%; opacity: 0; }
-      }
-    `}</style>
-  </div>
-));
+const PageLoader = memo(function PageLoader() {
+  return (
+    <div style={{ position: 'fixed', top: 56, left: 0, right: 0, zIndex: 9999 }}>
+      <div
+        style={{ height: 2, background: '#0F172A', animation: 'loadBar 1.2s ease forwards' }}
+      />
+      <style>{`
+        @keyframes loadBar {
+          0% { width: 0%; opacity: 1; }
+          80% { width: 90%; }
+          100% { width: 100%; opacity: 0; }
+        }
+      `}</style>
+    </div>
+  );
+});
 
 const FULL_LAYOUT = new Set(['/login', '/signup']);
 const NO_FOOTER = new Set(['/map', '/dashboard', '/login', '/signup']);

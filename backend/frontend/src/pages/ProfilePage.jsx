@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Mail, Phone, MapPin, LogOut, Check } from 'lucide-react';
@@ -21,7 +21,7 @@ export default function ProfilePage() {
     name: user?.name || '',
     email: user?.email || '',
     phone: user?.phone || '',
-    city: 'Ahmedabad, Gujarat',
+    city: '',
   });
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);

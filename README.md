@@ -225,6 +225,7 @@ curl -X POST http://localhost:8000/predict \
 | Variable | Default | Description |
 |---|---|---|
 | `VITE_API_URL` | `http://localhost:8000` | Backend API base URL |
+| `VITE_GOOGLE_CLIENT_ID` | empty | Google OAuth Web client ID for real Gmail/Google sign-in. Add `http://localhost:5173` and `http://127.0.0.1:5173` to Authorized JavaScript origins in Google Cloud Console. |
 
 ---
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
@@ -44,16 +44,34 @@ function ClickPin({ onPin }) {
   return null;
 }
 
-function RecenterBtn({ center }) {
+function MapControls({ center }) {
   const map = useMap();
   return (
-    <button
-      onClick={() => map.setView(center, 13, { animate: true })}
-      style={{ position: 'absolute', bottom: 80, right: 12, zIndex: 1000, width: 40, height: 40, background: '#fff', border: '1px solid #E2E8F0', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
-      aria-label="Recenter map"
-    >
-      <Navigation size={16} style={{ color: '#374151' }} />
-    </button>
+    <>
+      <button
+        onClick={() => map.setView(center, 13, { animate: true })}
+        style={{ position: 'absolute', bottom: 80, right: 12, zIndex: 1000, width: 40, height: 40, background: '#fff', border: '1px solid #E2E8F0', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}
+        aria-label="Recenter map"
+      >
+        <Navigation size={16} style={{ color: '#374151' }} />
+      </button>
+      <div style={{ position: 'absolute', right: 12, bottom: 130, zIndex: 1000, display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <button
+          onClick={() => map.zoomIn()}
+          style={{ width: 40, height: 40, background: '#fff', border: '1px solid #E2E8F0', borderRadius: '8px 8px 0 0', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: 18, fontWeight: 300, color: '#374151', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+          aria-label="Zoom in"
+        >
+          +
+        </button>
+        <button
+          onClick={() => map.zoomOut()}
+          style={{ width: 40, height: 40, background: '#fff', border: '1px solid #E2E8F0', borderRadius: '0 0 8px 8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: 18, fontWeight: 300, color: '#374151', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+          aria-label="Zoom out"
+        >
+          −
+        </button>
+      </div>
+    </>
   );
 }
 
@@ -216,15 +234,7 @@ export default function MapPage() {
           <MapContainer center={MAP_CENTER} zoom={12} style={{ width: '100%', height: '100%' }} zoomControl={false}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
             <ClickPin onPin={p => { setPin(p); setSelected(null); }} />
-            <RecenterBtn center={MAP_CENTER} />
-
-            <div style={{ position: 'absolute', right: 12, bottom: 130, zIndex: 1000, display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {['+', '−'].map(s => (
-                <button key={s} style={{ width: 40, height: 40, background: '#fff', border: '1px solid #E2E8F0', borderRadius: s === '+' ? '8px 8px 0 0' : '0 0 8px 8px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: 18, fontWeight: 300, color: '#374151', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-                  {s}
-                </button>
-              ))}
-            </div>
+            <MapControls center={MAP_CENTER} />
 
             {filtered.map(p => (
               <Marker

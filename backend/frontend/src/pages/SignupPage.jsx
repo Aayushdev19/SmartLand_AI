@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, AlertCircle, Check, ArrowRight, BarChart3, Globe } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, Check, ArrowRight, Globe } from 'lucide-react';
 import Logo from '../components/Logo';
+import GoogleSignInButton from '../components/GoogleSignInButton';
 import { saveUser } from '../utils/auth';
 import { useAuth } from '../hooks/useAuth';
 import signupHero from '../assets/signup_hero.png';
@@ -23,7 +24,7 @@ export default function SignupPage() {
   const [showCon, setShowCon] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handle = e => {
@@ -31,6 +32,22 @@ export default function SignupPage() {
     setForm(p => ({ ...p, [name]: type === 'checkbox' ? checked : value }));
     setError('');
   };
+
+  const handleGoogleSuccess = useCallback(credential => {
+    setLoading(true);
+    setError('');
+    const result = loginWithGoogle(credential);
+    setLoading(false);
+    if (result.error) {
+      setError(result.error);
+      return;
+    }
+    navigate('/dashboard');
+  }, [loginWithGoogle, navigate]);
+
+  const handleGoogleError = useCallback(message => {
+    setError(message);
+  }, []);
 
   const submit = async e => {
     e.preventDefault();
@@ -77,22 +94,13 @@ export default function SignupPage() {
             <div style={{ position: 'relative', height: 320, overflow: 'hidden' }}>
               <img
                 src={signupHero}
-                alt="Smart City Real Estate Analytics"
+                alt="Gujarat real estate analytics"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
               />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0F172A 0%, rgba(15,23,42,0.4) 60%, transparent 100%)' }} />
 
               <div style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(15,23,42,0.85)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 99, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 6, color: '#60A5FA', fontSize: 11, fontWeight: 700 }}>
                 <Globe size={13} /> Gujarat Real Estate Intelligence
-              </div>
-
-              <div style={{ position: 'absolute', bottom: 16, left: 16, right: 16, background: 'rgba(15,23,42,0.88)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '12px 16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#F59E0B', fontSize: 12, fontWeight: 700, marginBottom: 2 }}>
-                  <BarChart3 size={14} /> 10-Year Growth Forecast
-                </div>
-                <p style={{ fontSize: 18, fontWeight: 800, color: '#F8FAFC', letterSpacing: '-0.03em' }}>
-                  +68.4% <span style={{ fontSize: 12, color: '#94A3B8', fontWeight: 400 }}>Capital Appreciation</span>
-                </p>
               </div>
             </div>
 
@@ -144,6 +152,18 @@ export default function SignupPage() {
           )}
 
           <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <GoogleSignInButton
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              label="signup_with"
+            />
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#94A3B8', fontSize: 12, fontWeight: 600 }}>
+              <span style={{ flex: 1, height: 1, background: '#E2E8F0' }} />
+              OR
+              <span style={{ flex: 1, height: 1, background: '#E2E8F0' }} />
+            </div>
+
             <div>
               <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: '#374151', marginBottom: 7 }}>
                 Full Name <span style={{ color: '#DC2626' }}>*</span>

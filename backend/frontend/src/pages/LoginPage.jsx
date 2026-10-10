@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, AlertCircle, TrendingUp, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import Logo from '../components/Logo';
+import GoogleSignInButton from '../components/GoogleSignInButton';
 import { useAuth } from '../hooks/useAuth';
 import loginHero from '../assets/login_hero.png';
 
@@ -14,7 +15,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [info, setInfo] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handle = e => {
@@ -31,6 +32,24 @@ export default function LoginPage() {
     }
     setInfo(`Password reset instructions sent to ${form.email.trim()}`);
   };
+
+  const handleGoogleSuccess = useCallback(credential => {
+    setLoading(true);
+    setError('');
+    setInfo('');
+    const result = loginWithGoogle(credential);
+    setLoading(false);
+    if (result.error) {
+      setError(result.error);
+      return;
+    }
+    navigate('/dashboard');
+  }, [loginWithGoogle, navigate]);
+
+  const handleGoogleError = useCallback(message => {
+    setError(message);
+    setInfo('');
+  }, []);
 
   const submit = async e => {
     e.preventDefault();
@@ -56,22 +75,13 @@ export default function LoginPage() {
             <div style={{ position: 'relative', height: 320, overflow: 'hidden' }}>
               <img
                 src={loginHero}
-                alt="SmartLand Valuation Architecture"
+                alt="SmartLand property valuation dashboard"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
               />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0F172A 0%, rgba(15,23,42,0.4) 60%, transparent 100%)' }} />
 
               <div style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(15,23,42,0.85)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 99, padding: '4px 12px', display: 'flex', alignItems: 'center', gap: 6, color: '#4ADE80', fontSize: 11, fontWeight: 700 }}>
-                <ShieldCheck size={13} /> AI Verified (R² 0.9991)
-              </div>
-
-              <div style={{ position: 'absolute', bottom: 16, left: 16, right: 16, background: 'rgba(15,23,42,0.88)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 12, padding: '12px 16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#38BDF8', fontSize: 12, fontWeight: 700, marginBottom: 2 }}>
-                  <TrendingUp size={14} /> Vadodara Residential Valuation
-                </div>
-                <p style={{ fontSize: 18, fontWeight: 800, color: '#F8FAFC', letterSpacing: '-0.03em' }}>
-                  ₹18,500 <span style={{ fontSize: 12, color: '#94A3B8', fontWeight: 400 }}>/ sq m</span>
-                </p>
+                <ShieldCheck size={13} /> ML Model Active
               </div>
             </div>
 
@@ -80,7 +90,7 @@ export default function LoginPage() {
                 Institutional Property Intelligence
               </p>
               <p style={{ fontSize: 12, color: '#94A3B8', lineHeight: 1.6 }}>
-                Real-time ML land valuations, official Jantri rate mapping, and investment forecasting.
+                Real-time ML land valuations, official Jantri rate mapping, and investment forecasting across Gujarat.
               </p>
             </div>
           </div>
@@ -133,6 +143,18 @@ export default function LoginPage() {
           )}
 
           <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <GoogleSignInButton
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              label="signin_with"
+            />
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, color: '#94A3B8', fontSize: 12, fontWeight: 600 }}>
+              <span style={{ flex: 1, height: 1, background: '#E2E8F0' }} />
+              OR
+              <span style={{ flex: 1, height: 1, background: '#E2E8F0' }} />
+            </div>
+
             <div>
               <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: '#374151', marginBottom: 7 }}>
                 Email Address
@@ -166,7 +188,7 @@ export default function LoginPage() {
                   name="password"
                   value={form.password}
                   onChange={handle}
-                  placeholder="••••••••"
+                  placeholder="Password"
                   className="sl-input"
                   style={{ paddingRight: 44 }}
                   autoComplete="current-password"

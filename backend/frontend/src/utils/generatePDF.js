@@ -1,6 +1,6 @@
-import { jsPDF } from 'jspdf';
+﻿import { jsPDF } from 'jspdf';
 
-const rupee = n => `Rs. ${Number(n).toLocaleString('en-IN')}`;
+const rupee = n => `\u20B9${Number(n).toLocaleString('en-IN')}`;
 const pct = n => `${Number(n).toFixed(1)}%`;
 
 export function generatePDF(result, form) {
@@ -28,9 +28,9 @@ export function generatePDF(result, form) {
   line('SmartLand AI', margin, 12, 18, 'bold', [255, 255, 255]);
   line('Property Valuation Report', margin, 21, 9, 'normal', [148, 163, 184]);
   const now = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-  line(now, W - margin, 21, 8, 'normal', [148, 163, 184]);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(148, 163, 184);
+  doc.setFontSize(8);
   doc.text(now, W - margin, 21, { align: 'right' });
 
   y = 36;
@@ -67,7 +67,9 @@ export function generatePDF(result, form) {
   line('ESTIMATED MARKET VALUE', margin + 4, y + 6, 8, 'bold', [100, 116, 139]);
   line(`${rupee(result.predicted_price_sqm)} / sq m`, margin + 4, y + 15, 14, 'bold', [15, 23, 42]);
   if (result.total_value) {
-    line(`Total: ${rupee(result.total_value)}`, W - margin - 4, y + 15, 10, 'bold', [15, 23, 42]);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(15, 23, 42);
     doc.text(`Total: ${rupee(result.total_value)}`, W - margin - 4, y + 15, { align: 'right' });
   }
   y += 28;
@@ -112,14 +114,14 @@ export function generatePDF(result, form) {
 
   hline(y, margin, W - margin, [230, 232, 235]);
   y += 5;
-  line(`Model: ${result.model_used}  |  R² = ${result.r2}  |  MAE = ${rupee(result.mae)}/sq m`, margin, y, 8, 'normal', [148, 163, 184]);
+  line(`Model: ${result.model_used}  |  R2 = ${result.r2}  |  MAE = ${rupee(result.mae)}/sq m`, margin, y, 8, 'normal', [148, 163, 184]);
   y += 5;
 
   rect(0, 287, W, 10, [15, 23, 42]);
   doc.setFontSize(7);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(148, 163, 184);
-  doc.text('© 2026 SmartLand AI · This report is an AI-generated estimate, not an official government valuation.', W / 2, 293, { align: 'center' });
+  doc.text('SmartLand AI · This report is an AI-generated estimate, not an official government valuation.', W / 2, 293, { align: 'center' });
 
   const filename = `SmartLand_${form.district || 'Property'}_${form.land_type || 'Report'}_${Date.now()}.pdf`;
   doc.save(filename);

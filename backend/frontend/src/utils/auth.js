@@ -31,6 +31,20 @@ function parseToken(token) {
   }
 }
 
+function parseJwtPayload(token) {
+  try {
+    if (!token || typeof token !== 'string') return null;
+    const parts = token.split('.');
+    if (parts.length < 2) return null;
+    const padded = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+    const padding = (4 - (padded.length % 4)) % 4;
+    const decoded = decodeURIComponent(escape(atob(padded + '='.repeat(padding))));
+    return JSON.parse(decoded);
+  } catch {
+    return null;
+  }
+}
+
 function isTokenExpired(payload) {
   if (!payload?.exp) return true;
   return Date.now() > payload.exp;
@@ -88,6 +102,50 @@ export function loginUser(email, password) {
     iat: now,
     exp: now + TOKEN_TTL,
   };
+
+  const token = createToken(payload);
+  localStorage.setItem(TOKEN_KEY, token);
+  return { success: true, token, user: { ...payload } };
+}
+
+export function loginWithGoogleCredential(credential) {
+  const googleProfile = parseJwtPayload(credential);
+
+  if (!googleProfile?.email) {
+    return { error: 'Google sign-in did not return an email address.' };
+  }
+
+  if (googleProfile.email_verified === false) {
+    return { error: 'Please use a verified Google account.' };
+  }
+
+  const now = Date.now();
+  const email = googleProfile.email.toLowerCase().trim();
+  const payload = {
+    sub: `google:${googleProfile.sub || email}`,
+    name: googleProfile.name || email.split('@')[0],
+    email,
+    phone: '',
+    picture: googleProfile.picture || '',
+    provider: 'google',
+    iat: now,
+    exp: now + TOKEN_TTL,
+  };
+
+  const users = getUsers();
+  const existingUser = users.find(u => u.email.toLowerCase() === email);
+  if (!existingUser) {
+    users.push({
+      id: payload.sub,
+      name: payload.name,
+      email,
+      phone: '',
+      provider: 'google',
+      picture: payload.picture,
+      createdAt: new Date().toISOString(),
+    });
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  }
 
   const token = createToken(payload);
   localStorage.setItem(TOKEN_KEY, token);

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from 'react';
-import { getSession, logout as logoutFn, loginUser } from '../utils/auth';
+import { getSession, logout as logoutFn, loginUser, loginWithGoogleCredential } from '../utils/auth';
 
 export const AuthContext = createContext(null);
 
@@ -14,13 +14,21 @@ export function AuthProvider({ children }) {
     return result;
   }, []);
 
+  const loginWithGoogle = useCallback(credential => {
+    const result = loginWithGoogleCredential(credential);
+    if (result.success) {
+      setUser(result.user);
+    }
+    return result;
+  }, []);
+
   const logout = useCallback(() => {
     logoutFn();
     setUser(null);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoggedIn: !!user }}>
+    <AuthContext.Provider value={{ user, login, loginWithGoogle, logout, isLoggedIn: !!user }}>
       {children}
     </AuthContext.Provider>
   );
